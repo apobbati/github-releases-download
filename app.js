@@ -6,7 +6,7 @@ var _ = require('lodash');
 
 app.use(require('express-promise')());
 
-app.get('/gh-releases/:user/:project/:version', function(req, res) {
+app.get('/gh-releases/:user/:project/:version/:assetName', function(req, res) {
   var options = {
     method: 'GET',
     url: util.format('https://api.github.com/repos/%s/%s/releases',
@@ -20,14 +20,36 @@ app.get('/gh-releases/:user/:project/:version', function(req, res) {
   };
   console.log('URL: ' + options.url);
 
-  res.send(rp(options).then(function(res) {
-    if(res.statusCode != 200)
+  var version = req.params.version;
+  var assetName = req.params.assetName;
+
+  return res.send(rp(options).then(function(gh_res) {
+    if(gh_res.statusCode != 200)
       throw 'Error';
 
-    var body = JSON.parse(res.body);
-    return res.send(release_);
+    var releases = JSON.parse(gh_res.body);
+    var release = _.find(releases,
+      version == 'latest' ?
+        function() { return true; } :
+        function(r) { return r.tag_name == version; }
+    );
+
+    console.log(release);
+
+    if(!release)
+      throw 'Error';
+
+    var asset = _.find(release.assets, function(asset) {
+      return asset.name == assetName;
+    });
+
+    if(!asset)
+      throw 'Error';
+
+    return res.redirect(asset.browser_download_url);
   }).catch(function(e) {
-    return res.status(404);
+    res.statusCode = 404;
+    res.send();
   }));
 });
 
