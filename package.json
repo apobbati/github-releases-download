@@ -1,8 +1,8 @@
 {
   "name": "github-releases-download",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "This is the source to a small hosted service that will return a `302` redirect to the latest Github release link download for any public Github project",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -10,8 +10,8 @@
     "type": "git",
     "url": "git://github.com/apobbati/github-releases-download.git"
   },
-  "author": "",
-  "license": "ISC",
+  "author": "Abhinav Pobbati <apobbati@codeblock.io>",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/apobbati/github-releases-download/issues"
   },
