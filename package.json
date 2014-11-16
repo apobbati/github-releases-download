@@ -1,0 +1,22 @@
+{
+  "name": "github-releases-download",
+  "version": "0.0.0",
+  "description": "This is the source to a small hosted service that will return a `302` redirect to the latest Github release link download for any public Github project",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/apobbati/github-releases-download.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/apobbati/github-releases-download/issues"
+  },
+  "homepage": "https://github.com/apobbati/github-releases-download",
+  "dependencies": {
+    "express": "^4.10.2"
+  }
+}
