@@ -18,7 +18,6 @@ app.get('/gh-releases/:user/:project/:version/:assetName', function(req, res) {
     },
     resolveWithFullResponse: true
   };
-  console.log('URL: ' + options.url);
 
   var version = req.params.version;
   var assetName = req.params.assetName;
@@ -33,8 +32,6 @@ app.get('/gh-releases/:user/:project/:version/:assetName', function(req, res) {
         function() { return true; } :
         function(r) { return r.tag_name == version; }
     );
-
-    console.log(release);
 
     if(!release)
       throw 'Error';
